@@ -1,0 +1,31 @@
+.input {
+    position: relative;
+    padding: 0 5px 0 5px;
+}
+
+input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.label {
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    font-size: 12px;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.label-class {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.none-opacity {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
