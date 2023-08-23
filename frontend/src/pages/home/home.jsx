@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./home.css";
 import RecipeCard from "../../components/recipeCard/recipeCard";
-import AddRecipes from "../../components/addRecipes/addRecipes";
 function Home() {
   const demoRecipe = {
     name: "Delicious Pasta",
@@ -27,13 +26,19 @@ function Home() {
       { name: "Basil", quantity: "A handful" },
       { name: "Olive Oil", quantity: "2 tbsp" },
     ],
+    comment: [
+      { name: "moe", content: "hello world" },
+      { name: "moe2", content: "hello 3world" },
+      { name: "moe3", content: "hello32 world" },
+      { name: "moe4", content: "hello 2world" },
+    ],
   };
+  const allRecipe = [demoRecipe, demoRecipe, demoRecipe, demoRecipe];
   return (
     <div className="home">
-      {/* <RecipeCard recipe={demoRecipe} /> */}
-      <AddRecipes />
-      <div>hello</div>
-      <div>hello</div>
+      {allRecipe.map((ele) => (
+        <RecipeCard recipe={ele} />
+      ))}
     </div>
   );
 }
