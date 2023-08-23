@@ -5,9 +5,7 @@ import { AuthContext } from "../../context/authContext";
 
 const AddRecipes = () => {
   const { userData } = useContext(AuthContext);
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2d1ZXN0L2xvZ2luIiwiaWF0IjoxNjkyODExNzczLCJleHAiOjE2OTI4MTUzNzMsIm5iZiI6MTY5MjgxMTc3MywianRpIjoiVUhTMUpFbnlYYlIwNmtqciIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.ZOWW7G6_YPkn-0lBegEGngXeQhjyshRnJND4UsH77kI"}`;
+  axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
   const [name, setName] = useState("");
   const [cuisine, setCuisine] = useState("");
 

@@ -11,6 +11,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::get("profile", [AuthController::class, "profile"]);
 
         Route::post("add_recipe", [RecipeController::class, "CreateRecipe"]);
+        Route::get("get_recipes", [RecipeController::class, "getRecipes"]);
     });
 
 Route::group(["prefix" => "guest"], function(){

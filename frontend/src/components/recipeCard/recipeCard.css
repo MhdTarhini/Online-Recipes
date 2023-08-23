@@ -11,8 +11,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     width: 300px;
+    height: 670px;
     display: flex;
-        flex-direction: column;
+    flex-direction: column;
 }
 
 .recipe-title {
@@ -33,9 +34,10 @@
 }
 
 .recipe-image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
+    height: 200px;
 }
 
 ul {

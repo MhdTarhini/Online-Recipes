@@ -10,9 +10,8 @@ function Register() {
   const [errorContent, setErrorContent] = useState("");
   const [data, setdata] = useState([
     {
-      email: "",
       name: "",
-      username: "",
+      email: "",
       password: "",
     },
   ]);
@@ -23,13 +22,8 @@ function Register() {
     console.log(data);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/auth/register",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        "http://127.0.0.1:8000/api/guest/register",
+        data
       );
       console.log(response.data);
       navigate("/");
@@ -41,7 +35,7 @@ function Register() {
   return (
     <>
       <div className=" flex column center signup-container">
-        <div className="logo">Books</div>
+        <div className="logo">Recipes</div>
         <div className="header-text">
           Sign up tp see photos and videos from your friends
         </div>
@@ -52,16 +46,11 @@ function Register() {
         <div className="inputs flex column">
           <Input
             onchange={handleDataChange}
-            label={"First Name"}
-            name={"firstName"}
+            label={"Name"}
+            name={"name"}
             type={"text"}
           />
-          <Input
-            onchange={handleDataChange}
-            label={"Last Name"}
-            name={"lastName"}
-            type={"text"}
-          />
+
           <Input
             onchange={handleDataChange}
             label={"Email"}

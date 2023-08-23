@@ -21,7 +21,7 @@ const RecipeCard = ({ recipe }) => {
         </div>
         <h1 className="recipe-title">{recipe.name}</h1>
         <p className="recipe-details">Cuisine: {recipe.cuisine}</p>
-        <p className="recipe-details">Created by: {recipe.user}</p>
+        <p className="recipe-details">Created by: {recipe.user.name}</p>
         <div className="image-container">
           <img src={image} className="recipe-image " alt="" srcset="" />
           {recipe.images.map((image, index) => (
@@ -36,7 +36,7 @@ const RecipeCard = ({ recipe }) => {
         <ul>
           {recipe.ingredients.map((ingredient, index) => (
             <li key={index}>
-              {ingredient.name} - {ingredient.quantity}
+              {ingredient.ingredient.name} - {ingredient.ingredient.quantity}
             </li>
           ))}
         </ul>

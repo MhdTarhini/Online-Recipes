@@ -34,10 +34,8 @@ class RecipeController extends Controller
     }
 
      foreach ($request->images as $imageData) {
-        $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
-        $image_name = time() . '_' . uniqid() . '.png'; 
-        $image_path = public_path('images') . '/' . $image_name;
-        file_put_contents($image_path, $image_data);
+         $image_name = time() . '_' . uniqid() .$imageData->getClientOriginalName();
+        $imageData->move(public_path('images'), $image_name);
 
         $recipeImage = new RecipesImage();
         $recipeImage->recipe_id = $recipe->id;
@@ -48,7 +46,15 @@ class RecipeController extends Controller
 
     return response()->json([
         'status' => 'success',
-        'recipe' => $recipe,
+        'data' => $recipe,
+    ]);
+   }
+
+   function getRecipes(){
+    $recipes = Recipe::with(['comments.user',"user", 'ingredients.ingredient', 'images',"likes"])->get();
+        return response()->json([
+        'status' => 'success',
+        'data' => $recipes,
     ]);
    }
 }

@@ -17,13 +17,17 @@ class Recipe extends Model
     {
         return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
     }
+        public function likes()
+    {
+        return $this->hasMany(Like::class, 'recipe_id');
+    }
         public function ingredients()
     {
         return $this->hasMany(RecipeIngredient::class, 'recipe_id');
     }
         public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(RecipesImage::class);
     }
         public function plans()
     {

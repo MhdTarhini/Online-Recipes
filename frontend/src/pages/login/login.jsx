@@ -22,7 +22,7 @@ function Login() {
   const handlesubmit = async () => {
     try {
       await login(data);
-      navigate("/home");
+      navigate("/user");
     } catch (err) {
       setError(true);
       setErrorContent(err.response.data.message);
