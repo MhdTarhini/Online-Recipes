@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('shop_lists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
-        Schema::create('list_items', function (Blueprint $table) {
+        Schema::create('shop_list_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('list_id');
             $table->foreign('list_id')->references('id')->on('lists')->onDelete('cascade');
