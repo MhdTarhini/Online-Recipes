@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./home.css";
 import RecipeCard from "../../components/recipeCard/recipeCard";
+import AddRecipes from "../../components/addRecipes/addRecipes";
 function Home() {
   const demoRecipe = {
     name: "Delicious Pasta",
@@ -29,7 +30,8 @@ function Home() {
   };
   return (
     <div className="home">
-      <RecipeCard recipe={demoRecipe} />
+      {/* <RecipeCard recipe={demoRecipe} /> */}
+      <AddRecipes />
       <div>hello</div>
       <div>hello</div>
     </div>
