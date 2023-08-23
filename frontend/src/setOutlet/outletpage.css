@@ -1,0 +1,11 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.outlet-page {
+    display: flex;
+    flex-direction: column;
+}

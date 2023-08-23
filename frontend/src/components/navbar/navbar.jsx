@@ -3,14 +3,14 @@ import "./navbar.css";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
-function Navbar({ onSearch }) {
+function Navbar() {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const { logout } = useContext(AuthContext);
-  const handleSearch = () => {
-    onSearch(searchText);
-  };
-  handleSearch();
+  // const handleSearch = () => {
+  //   onSearch(searchText);
+  // };
+  // handleSearch();
   const handleLogout = async () => {
     await logout();
     navigate("/");

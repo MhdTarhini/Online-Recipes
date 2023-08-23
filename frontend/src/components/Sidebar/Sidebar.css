@@ -1,0 +1,15 @@
+.sidebar {
+  justify-content: flex-start;
+  padding: 20px;
+  gap: 40px;
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  position: fixed;
+}
+
+.side-item {
+  padding: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+}
