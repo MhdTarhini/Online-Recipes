@@ -23,7 +23,7 @@ function Sidebar() {
       <div
         className="Shop-list side-item"
         onClick={() => {
-          navigate("user/recipe");
+          navigate("shop");
         }}>
         Shop List
       </div>

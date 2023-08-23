@@ -1,0 +1,96 @@
+/* shopList.css */
+
+.shop-list-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.shop-list-header {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.shop-list-empty {
+    color: gray;
+    font-style: italic;
+}
+
+.shop-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.shop-list-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.shop-list-item-content {
+    flex: 1;
+}
+
+.shop-list-item-title {
+    font-size: 18px;
+}
+
+.shop-list-item-quantity {
+    color: gray;
+}
+
+.shop-list-item-remove {
+    cursor: pointer;
+    color: red;
+}
+
+.recipe-list-header {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.recipe-list-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recipe-list-item-content {
+    flex: 1;
+}
+
+.recipe-list-item-title {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.recipe-list-item-cuisine {
+    color: gray;
+    font-style: italic;
+}
+
+.recipe-list-item-actions button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.recipe-list-item-actions button:hover {
+    background-color: #0056b3;
+}

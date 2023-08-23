@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import "./recipeCard.css";
+import axios from "axios";
 
 const RecipeCard = ({ recipe }) => {
+  if (recipe.comment == undefined) console.log();
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(recipe.images[0].image_url);
   console.log(recipe.images[1]);
   const handleImageClick = (index) => {
     setImage(recipe.images[index].image_url);
   };
-
+  const addToList = () => {
+    try {
+      const response = axios.post(
+        `http://127.0.0.1:8000/api/add_to_list/${recipe.id}`
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="full-card">
       <div className="recipe-card">
@@ -69,7 +79,7 @@ const RecipeCard = ({ recipe }) => {
         <div className="right-side">
           <div className="right-section">
             <div className="comment-section">
-              {recipe.comment.map((comment) => {
+              {recipe.comments.map((comment) => {
                 return (
                   <div className="comment">
                     <div className="user-comment">{comment.name}</div>
@@ -86,7 +96,12 @@ const RecipeCard = ({ recipe }) => {
             />
           </div>
           <div className="buttons">
-            <button>Add To List</button>
+            <button
+              onClick={() => {
+                addToList();
+              }}>
+              Add To List
+            </button>
             <div className="calendar">
               <button>Add To calendar</button>
               <input type="date" />

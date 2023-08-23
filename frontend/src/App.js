@@ -7,6 +7,7 @@ import "./utilities.css";
 import { AuthContextProvider } from "./context/authContext";
 import OutletPage from "./setOutlet/outlet";
 import AddRecipes from "./components/addRecipes/addRecipes";
+import ShopList from "./pages/shopList/shopList";
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
           <Route path="/user" element={<OutletPage />}>
             <Route index element={<Home />} />
             <Route path="recipe" element={<AddRecipes />} />
-            {/* <Route index element={<Home />} />
-            <Route index element={<Home />} /> */}
+            <Route path="shop" element={<ShopList />} />
+            {/* <Route index element={<Home />} />  */}
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Login />} />
