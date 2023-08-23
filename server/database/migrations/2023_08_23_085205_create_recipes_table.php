@@ -29,7 +29,7 @@ return new class extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('amount');
+            $table->string('quantity');
             $table->timestamps();
         });
 
@@ -39,7 +39,6 @@ return new class extends Migration
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->unsignedBigInteger('ingredient_id');
             $table->foreign('ingredient_id')->references('id')->on('ingredients');
-            $table->string('amount');
             $table->timestamps();
         });
 

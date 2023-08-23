@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Plan extends Model
 {
     use HasFactory;
+
+        public function recipes()
+    {
+        return $this->belongsToMany(Recipe::class)->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

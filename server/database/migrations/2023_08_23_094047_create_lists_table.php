@@ -21,7 +21,7 @@ return new class extends Migration
         Schema::create('shop_list_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('list_id');
-            $table->foreign('list_id')->references('id')->on('lists')->onDelete('cascade');
+            $table->foreign('list_id')->references('id')->on('shop_lists')->onDelete('cascade');
             $table->unsignedBigInteger('recipe_id');
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
             
