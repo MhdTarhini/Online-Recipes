@@ -30,7 +30,7 @@ function Sidebar() {
       <div
         className="calendar side-item"
         onClick={() => {
-          navigate("user/recipe");
+          navigate("calendar");
         }}>
         Calendar
       </div>

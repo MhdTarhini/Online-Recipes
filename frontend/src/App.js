@@ -8,6 +8,7 @@ import { AuthContextProvider } from "./context/authContext";
 import OutletPage from "./setOutlet/outlet";
 import AddRecipes from "./components/addRecipes/addRecipes";
 import ShopList from "./pages/shopList/shopList";
+import RecipeCalendar from "./pages/RecipeCalendar/recipeCalendar";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="recipe" element={<AddRecipes />} />
             <Route path="shop" element={<ShopList />} />
-            {/* <Route index element={<Home />} />  */}
+            <Route path="calendar" element={<RecipeCalendar />} />
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Login />} />

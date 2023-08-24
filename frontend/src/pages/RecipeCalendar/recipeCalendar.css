@@ -1,0 +1,9 @@
+.calendar-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.calendar-plan {
+    max-width: 500px;
+    margin: 0 auto;
+}
