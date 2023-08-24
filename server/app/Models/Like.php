@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     use HasFactory;
+        function scopeIsliked($query,$id){
+        return $query->where('user_id', $id);
+    }
 }

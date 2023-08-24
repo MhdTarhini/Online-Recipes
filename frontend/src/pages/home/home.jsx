@@ -7,6 +7,7 @@ function Home() {
   const { userData } = useContext(AuthContext);
   axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
   const [data, setData] = useState([]);
+  const [isliked, setIsLiked] = useState([]);
 
   const handleData = async () => {
     try {
@@ -17,15 +18,27 @@ function Home() {
       console.error(error);
     }
   };
-  console.log(data);
+
+  const fetchIsliked = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/user_likes");
+      setIsLiked(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     handleData();
+    fetchIsliked();
   }, []);
 
   return (
     <div className="home">
-      {data.map((ele) => (
-        <RecipeCard recipe={ele} />
+      {data.map((recipe) => (
+        <RecipeCard
+          recipe={recipe}
+          isLiked={isliked.includes(recipe.id) ? true : false}
+        />
       ))}
     </div>
   );

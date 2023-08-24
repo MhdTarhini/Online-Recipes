@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ShopListController;
 use Illuminate\Http\Request;
@@ -17,6 +20,14 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::get("add_to_list/{id?}",[ShopListController::class,"addToList"]);
         Route::get("get_list",[ShopListController::class,"getShopList"]);
         Route::delete("remove_item/{id?}",[ShopListController::class,"removeItem"]);
+
+        Route::post('add_comment',[CommentController::class,"addComment"]);
+
+        Route::get("add_like/{id?}",[LikeController::class,"addLike"]);
+        Route::delete("remove_like/{id?}",[LikeController::class,"removeLike"]);
+        Route::get('user_likes',[LikeController::class,"userIsLiked"]);
+
+        Route::post('add_plan',[PlanController::class,"addPlan"]);
     });
 
 Route::group(["prefix" => "guest"], function(){

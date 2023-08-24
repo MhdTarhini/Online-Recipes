@@ -57,7 +57,7 @@ function ShopList() {
               </div>
             </div>
             <div className="shop-list-item-actions">
-              <button onClick={() => handleRemoveRecipe(recipe.recipe.id)}>
+              <button onClick={() => handleRemoveRecipe(recipe.id)}>
                 Remove
               </button>
             </div>

@@ -48,7 +48,7 @@ class ShopListController extends Controller
         return response()->json(['status' => 'failed',]);
     }
 
-    $item = ShopListItem::where("recipe_id",$id);
+    $item = ShopListItem::find($id);
      if (!$item || $item->list_id !== $shopList->id) {
         return response()->json(['status' => 'failed',]);
     }
