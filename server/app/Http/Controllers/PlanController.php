@@ -8,17 +8,75 @@ use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
-    public function addPlan(Request $request) {
+public function addPlan(Request $request) {
+    $auth_user_id = Auth::user()->id;
+    $recipe_id = $request->recipe_id;
+    $date = $request->date;
 
-        $auth_user = Auth::user()->id;
-        $plan=new Plan();
-        $plan->user_id = $auth_user;
-        $plan->recipe_id =$request->recipe_id;
-        $plan->date =$request->date;
+    $existingPlan = Plan::where('user_id', $auth_user_id)
+                         ->where('recipe_id', $recipe_id)
+                         ->where('date', $date)
+                         ->first();
 
-        $plan->save();
+    if ($existingPlan) {
+        return response()->json([
+            "status" => "error",
+            "message" => "already exists",
+        ]); 
+    }
+
+    $plan = new Plan();
+    $plan->user_id = $auth_user_id;
+    $plan->recipe_id = $recipe_id;
+    $plan->date = $date;
+
+    $plan->save();
+    
+    return response()->json([
+        "status" => "success",
+    ]);
+}
+
+    public function getPlan($date) {
+        $auth_user_id = Auth::user()->id;
+
+        $plan = Plan::where('user_id', $auth_user_id)
+                     ->where('date', $date)
+                     ->get();
+
+        if ($plan->isEmpty()) {
+            return response()->json([
+                "status" => "error",
+                "message" => "Plan not found",
+            ], 404);
+    }
+
+    return response()->json([
+        "status" => "success",
+        "plan" => $plan,
+        ]);
+    }
+
+    public function deletePlan(Request $request) {
+        $auth_user_id = Auth::user()->id;
+        
+        $plan = Plan::where('user_id', $auth_user_id)
+                ->where('recipe_id', $request->recipe_id)
+                ->where('date', $$request->date)
+                ->get();
+
+        if (!$plan) {
+            return response()->json([
+                "status" => "error",
+                "message" => "Plan not found",
+            ], 404);
+        }
+
+        $plan->delete();
+
         return response()->json([
             "status" => "success",
+            "message" => "Plan deleted successfully",
         ]);
     }
 }

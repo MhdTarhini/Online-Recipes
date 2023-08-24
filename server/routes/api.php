@@ -28,6 +28,8 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::get('user_likes',[LikeController::class,"userIsLiked"]);
 
         Route::post('add_plan',[PlanController::class,"addPlan"]);
+        Route::get('get_plan/{date?}',[PlanController::class,"getPlan"]);
+        Route::post('delete_plan',[PlanController::class,"deletePlan"]);
     });
 
 Route::group(["prefix" => "guest"], function(){

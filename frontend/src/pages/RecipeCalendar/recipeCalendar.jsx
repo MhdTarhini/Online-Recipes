@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./recipeCalendar.css";
+import axios from "axios";
 
 function RecipeCalendar() {
   const [date, setDate] = useState(new Date());
@@ -15,6 +16,14 @@ function RecipeCalendar() {
       .padStart(2, "0")}-${newDate.getDate().toString().padStart(2, "0")}`;
 
     console.log(formattedDate);
+  };
+
+  const getRecipes = async () => {
+    try {
+      const response = await axios.get("");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
