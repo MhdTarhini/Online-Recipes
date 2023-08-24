@@ -1,44 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+}
 .signup-container {
-    max-width: 400px;
-    position: relative;
-    padding: 40px;
-    height: 700px;
-    left: 38%;
-    border: 1px solid rgba(0, 0, 0, 0.286);
-    gap: 20px;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
 }
 
 .logo {
-    width: 175px;
-    height: 51px;
-    cursor: pointer;
+    font-size: 2.5rem;
+        color: #ff6b6b;
+        margin-bottom: 1rem;
 }
 
+
 .header-text {
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 20px;
-    margin: 0 40px 10px;
+    font-size: 1.2rem;
+        color: #333333;
+        margin-bottom: 1rem;
     text-align: center;
-    color: rgba(65, 65, 65, 0.678);
-    width: 100%;
 }
 
 .facebook {
-    border: none;
+    background-color: #ffe66d;
+        color: #333333;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
     text-align: center;
-    background-color: rgba(0, 149, 246);
+    cursor: pointer;
+        margin-bottom: 1rem;
+    }
+    
+    .facebook:hover {
+        background-color: #ffd04f;
+    }
+    
+    .or {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     width: 100%;
-    padding: 10px;
-    color: white;
+    margin: 1rem 0;
+        color: #333333;
+    }
+    
+    .or span {
+        width: 45%;
+        border-top: 1px solid #333333;
 }
 
 .inputs {
     width: 100%;
-    gap: 5px
+    max-width: 300px;
+        margin-bottom: 1rem;
+    }
+    
+    .error {
+        color: #ff8c8c;
+        margin-top: 0.5rem;
+    }
+    
+    .bottom-text {
+        font-size: 0.9rem;
+        color: #333333;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .bottom-text a {
+        color: #333333;
+        text-decoration: underline;
+    }
+    
+    .policy {
+        font-size: 0.9rem;
+        color: #333333;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .policy a {
+        color: #333333;
+        text-decoration: underline;
+    }
+    
+    button {
+        background-color: #ff6b6b;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        cursor: pointer;
+        border-radius: 1rem;
+        transition: background-color 0.3s ease-in-out;
+    }
+    
+    button:hover {
+        background-color: #ff8c8c;
 }
 
-.text {
-    font-size: 12px;
-    color: rgba(65, 65, 65, 0.678);
+.have-account {
+    color: #333333;
+    margin-top: 1rem;
 }

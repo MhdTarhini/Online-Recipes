@@ -37,7 +37,7 @@ function Register() {
       <div className=" flex column center signup-container">
         <div className="logo">Recipes</div>
         <div className="header-text">
-          Sign up tp see photos and videos from your friends
+          Sign up to see Recipes and Share them with your friends
         </div>
         <div className="facebook roundedMedium bold">Log in with facebook</div>
         <div className="or">
