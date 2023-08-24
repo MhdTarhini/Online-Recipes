@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./recipeCard.css";
 import axios from "axios";
+import { AuthContext } from "../../context/authContext";
+import { FacebookShareButton, FacebookIcon } from "react-share";
+import { TwitterShareButton, TwitterIcon } from "react-share";
 
-const RecipeCard = ({ recipe, isLiked }) => {
-  if (recipe.comment == undefined) console.log();
+const RecipeCard = ({ recipe }) => {
+  const { userData } = useContext(AuthContext);
+
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(recipe.images[0].image_url);
   const [comment, setComment] = useState("");
-  const [userliked, setUserliked] = useState(isLiked);
+  const [userliked, setUserliked] = useState(false);
   const [planDate, setPlanDate] = useState("");
-
+  const userIsLiked = () => {
+    recipe.likes.map((like) => {
+      if (like.user_id === userData.id) {
+        setUserliked(true);
+      } else {
+        setUserliked(false);
+      }
+    });
+  };
   const handlePlanData = async () => {
     const data = new FormData();
     data.append("recipe_id", recipe.id);
@@ -25,21 +37,20 @@ const RecipeCard = ({ recipe, isLiked }) => {
     try {
       if (!userliked) {
         await axios.get(`http://127.0.0.1:8000/api/add_like/${recipe.id}`);
-        // setCountLikes(countLike + 1);
       } else {
         await axios.delete(
           `http://127.0.0.1:8000/api/remove_like/${recipe.id}`
         );
-        // setCountLikes(countLike - 1);
       }
       setUserliked(!userliked);
     } catch (error) {
       console.error(error);
     }
   };
+
   useEffect(() => {
-    setUserliked(isLiked);
-  }, [isLiked]);
+    userIsLiked();
+  }, []);
 
   const handleImageClick = (index) => {
     setImage(recipe.images[index].image_url);
@@ -166,7 +177,20 @@ const RecipeCard = ({ recipe, isLiked }) => {
                 }}
               />
             </div>
-            <button>Share</button>
+            <div>
+              <FacebookShareButton
+                url={"https://www.example.com"}
+                quote={"Dummy text!"}
+                hashtag="#muo">
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <TwitterShareButton
+                url={"https://www.example.com"}
+                quote={"Dummy text!"}
+                hashtag="#muo">
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+            </div>
           </div>
         </div>
       ) : null}

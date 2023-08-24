@@ -30,6 +30,8 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post('add_plan',[PlanController::class,"addPlan"]);
         Route::get('get_plan/{date?}',[PlanController::class,"getPlan"]);
         Route::post('delete_plan',[PlanController::class,"deletePlan"]);
+
+        Route::get("search/{search}",[RecipeController::class,"searchRecipes"]);
     });
 
 Route::group(["prefix" => "guest"], function(){

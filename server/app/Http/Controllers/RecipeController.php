@@ -51,10 +51,35 @@ class RecipeController extends Controller
    }
 
    function getRecipes(){
-    $recipes = Recipe::with(['comments.user',"user", 'ingredients.ingredient', 'images',"likes"])->get();
+    $recipes = Recipe::with(['comments.user',"likes"])->get();
         return response()->json([
         'status' => 'success',
         'data' => $recipes,
     ]);
    }
+
+    public function searchRecipes($search) {
+
+        $recipesQuery = Recipe::query();
+    
+        $recipesQuery->where(function ($query) use ($search) {
+         $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('cuisine', 'like', '%' . $search . '%')
+                ->orWhereHas('ingredients.ingredient', function ($subquery) use ($search) {
+                  $subquery->where('name', 'like', '%' . $search . '%');
+                })
+                ->orWhereHas('user', function ($subquery) use ($search) {
+                  $subquery->where('name', 'like', '%' . $search . '%');
+                });
+        });
+
+        $recipes = $recipesQuery->with(['comments.user',"likes"])->get();
+
+        return response()->json([
+            "status" => "success", 
+            "data" => $recipes
+        ]);
+      
+    }
+
 }

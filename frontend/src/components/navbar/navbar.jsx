@@ -2,19 +2,36 @@ import React, { useContext, useEffect, useState } from "react";
 import "./navbar.css";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Navbar() {
+function Navbar({ onSearch }) {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const { logout } = useContext(AuthContext);
-  // const handleSearch = () => {
-  //   onSearch(searchText);
-  // };
-  // handleSearch();
+
+  const handleSearch = async () => {
+    if (searchText == "") {
+      onSearch([]);
+    } else {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/search/${searchText}`
+        );
+        const search_results = await response.data.data;
+        // console.log(search_results);
+        onSearch(search_results);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
   const handleLogout = async () => {
     await logout();
     navigate("/");
   };
+  useEffect(() => {
+    handleSearch();
+  }, [searchText]);
   return (
     <div className="navbar">
       <div className="logo">Logo</div>

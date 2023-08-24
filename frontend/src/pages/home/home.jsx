@@ -19,26 +19,15 @@ function Home() {
     }
   };
 
-  const fetchIsliked = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/api/user_likes");
-      setIsLiked(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   useEffect(() => {
     handleData();
-    fetchIsliked();
   }, []);
 
   return (
     <div className="home">
       {data.map((recipe) => (
-        <RecipeCard
-          recipe={recipe}
-          isLiked={isliked.includes(recipe.id) ? true : false}
-        />
+        <RecipeCard recipe={recipe} />
       ))}
     </div>
   );

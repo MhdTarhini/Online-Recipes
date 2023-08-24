@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     use HasFactory;
-
+    protected $appends = ['user','ingredients','images'];
         public function user()
     {
         return $this->belongsTo(User::class);
@@ -41,5 +41,19 @@ class Recipe extends Model
         public function shoppingListItems()
     {
         return $this->hasMany(ShopListItem::class);
+    }
+
+
+        public function getUserAttribute()
+    {
+        return $this->user()->first();
+    }
+        public function getIngredientsAttribute()
+    {
+        return $this->ingredients()->with("ingredient")->get();
+    }
+        public function getImagesAttribute()
+    {
+        return $this->images()->get();
     }
 }
