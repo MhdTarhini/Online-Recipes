@@ -41,16 +41,16 @@ public function addPlan(Request $request) {
         $auth_user_id = Auth::user()->id;
 
         $plan = Plan::where('user_id', $auth_user_id)
-                     ->where('date', $date)
+                     ->where('date', $date)->with("recipe.ingredients.ingredient")
                      ->get();
 
         if ($plan->isEmpty()) {
             return response()->json([
                 "status" => "error",
                 "message" => "Plan not found",
-            ], 404);
+                "plan" => [],
+            ]);
     }
-
     return response()->json([
         "status" => "success",
         "plan" => $plan,
@@ -62,8 +62,8 @@ public function addPlan(Request $request) {
         
         $plan = Plan::where('user_id', $auth_user_id)
                 ->where('recipe_id', $request->recipe_id)
-                ->where('date', $$request->date)
-                ->get();
+                ->where('date', $request->date)
+                ->first();
 
         if (!$plan) {
             return response()->json([

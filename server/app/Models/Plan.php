@@ -9,9 +9,9 @@ class Plan extends Model
 {
     use HasFactory;
 
-        public function recipes()
+        public function recipe()
     {
-        return $this->belongsToMany(Recipe::class)->withTimestamps();
+        return $this->belongsTo(Recipe::class,"recipe_id");
     }
 
     public function user()

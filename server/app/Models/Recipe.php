@@ -31,7 +31,7 @@ class Recipe extends Model
     }
         public function plans()
     {
-        return $this->belongsToMany(Plan::class)->withTimestamps();
+        return $this->hasMany(Plan::class)->withTimestamps();
     }
         public function shoppingLists()
     {
