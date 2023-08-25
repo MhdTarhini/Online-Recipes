@@ -1,10 +1,13 @@
+body {
+  background-color: #166866;
+}
 .sidebar {
   padding: 20px;
-  padding-top: 50px;
   width: 250px;
-  background-color: #252932;
+  background-color: #166866;
   color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+    position: fixed;
 }
 
 .side-item {
@@ -14,17 +17,15 @@
   }
   
   .side-item:hover {
-    background-color: #2c323a;
+    background-color: #2c323a55;
   }
   
-  .new-recipe {
-    color: #61dafb;
-  }
   
-  .side-item:not(:last-child) {
+    .side-item {
     border-bottom: 1px solid #40454c;
+    margin: 10px 0px;
   }
   
   .sidebar.flex.column {
-    margin-top: 20px;
+    margin-top: 53px;
 }

@@ -7,14 +7,31 @@ import { TwitterShareButton, TwitterIcon } from "react-share";
 
 const RecipeCard = ({ recipe }) => {
   const { userData } = useContext(AuthContext);
-
+  const [recipeContent, setRecipeContent] = useState(recipe);
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(recipe.images[0].image_url);
   const [comment, setComment] = useState("");
   const [userliked, setUserliked] = useState(false);
   const [planDate, setPlanDate] = useState("");
+  const [inList, setInList] = useState(false);
+
+  const getList = async () => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/get_list`);
+      const lists = await response.data.data;
+      if (lists !== []) {
+        lists.items.forEach((item) => {
+          if (item.recipe.id == recipe.id) {
+            setInList(true);
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const userIsLiked = () => {
-    recipe.likes.map((like) => {
+    recipeContent.likes.forEach((like) => {
       if (like.user_id === userData.id) {
         setUserliked(true);
       } else {
@@ -23,8 +40,9 @@ const RecipeCard = ({ recipe }) => {
     });
   };
   const handlePlanData = async () => {
+    setOpen(!open);
     const data = new FormData();
-    data.append("recipe_id", recipe.id);
+    data.append("recipe_id", recipeContent.id);
     data.append("date", planDate);
     try {
       const response = axios.post(`http://127.0.0.1:8000/api/add_plan`, data);
@@ -36,10 +54,12 @@ const RecipeCard = ({ recipe }) => {
   const handleLike = async () => {
     try {
       if (!userliked) {
-        await axios.get(`http://127.0.0.1:8000/api/add_like/${recipe.id}`);
+        await axios.get(
+          `http://127.0.0.1:8000/api/add_like/${recipeContent.id}`
+        );
       } else {
         await axios.delete(
-          `http://127.0.0.1:8000/api/remove_like/${recipe.id}`
+          `http://127.0.0.1:8000/api/remove_like/${recipeContent.id}`
         );
       }
       setUserliked(!userliked);
@@ -48,37 +68,37 @@ const RecipeCard = ({ recipe }) => {
     }
   };
 
-  useEffect(() => {
-    userIsLiked();
-  }, []);
-
   const handleImageClick = (index) => {
     setImage(recipe.images[index].image_url);
   };
   const addToList = () => {
     try {
       const response = axios.get(
-        `http://127.0.0.1:8000/api/add_to_list/${recipe.id}`
+        `http://127.0.0.1:8000/api/add_to_list/${recipeContent.id}`
       );
     } catch (error) {
       console.error(error);
     }
   };
-
   const addComment = () => {
     const data = new FormData();
-    data.append("recipeId", recipe.id);
+    data.append("recipeId", recipeContent.id);
     data.append("content", comment);
     try {
       const response = axios.post(
         `http://127.0.0.1:8000/api/add_comment`,
         data
       );
-      console.log(response.data);
+      const updatedComments = [...recipe.comments, response.data.comment];
+      setRecipeContent(updatedComments);
     } catch (error) {
       console.error(error);
     }
   };
+  useEffect(() => {
+    userIsLiked();
+    getList();
+  }, []);
 
   return (
     <div className="full-card">
@@ -107,6 +127,20 @@ const RecipeCard = ({ recipe }) => {
               fill="#FFFFFF"
             />
           </svg>
+        </div>
+        <div className="image-container">
+          <img src={image} className="recipe-image " alt="" srcSet="" />
+          <div className="circle-container">
+            {recipeContent.images.map((image, index) => (
+              <div
+                className="circle"
+                onClick={() => handleImageClick(index)}
+                key={index}></div>
+            ))}
+          </div>
+        </div>
+        <div className="name">
+          <h1 className="recipe-title">{recipeContent.name}</h1>
           <div
             className="open"
             onClick={() => {
@@ -114,52 +148,44 @@ const RecipeCard = ({ recipe }) => {
             }}>
             {open ? (
               <svg
-                width="24px"
-                height="24px"
+                width="40px"
+                height="40px"
                 viewBox="0 0 24 24"
                 fill="none"
+                className="flesh"
                 xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" fill="white" />
+                <rect width="24" height="24" />
                 <path
                   d="M14.5 17L9.5 12L14.5 7"
                   stroke="#000000"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             ) : (
               <svg
-                width="24px"
-                height="24px"
+                width="40px"
+                height="40px"
                 viewBox="0 0 24 24"
                 fill="none"
+                className="flesh"
                 xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" fill="white" />
+                <rect width="24" height="24" />
                 <path
                   d="M9.5 7L14.5 12L9.5 17"
                   stroke="#000000"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             )}
           </div>
         </div>
-        <h1 className="recipe-title">{recipe.name}</h1>
-        <p className="recipe-details">Cuisine: {recipe.cuisine}</p>
-        <p className="recipe-details">Created by: {recipe.user.name}</p>
-        <div className="image-container">
-          <img src={image} className="recipe-image " alt="" srcset="" />
-          <div className="circle-container">
-            {recipe.images.map((image, index) => (
-              <div
-                className="circle"
-                onClick={() => handleImageClick(index)}></div>
-            ))}
-          </div>
-        </div>
-        <ul>
-          {recipe.ingredients.map((ingredient, index) => (
+        <p className="recipe-details">Cuisine: {recipeContent.cuisine}</p>
+        <p className="recipe-details">Created by: {recipeContent.user.name}</p>
+
+        <ul className="ingredient-list">
+          {recipeContent.ingredients.map((ingredient, index) => (
             <li key={index}>
               {ingredient.ingredient.name} - {ingredient.ingredient.quantity}
             </li>
@@ -170,10 +196,10 @@ const RecipeCard = ({ recipe }) => {
         <div className="right-side">
           <div className="right-section">
             <div className="comment-section">
-              {recipe.comments.map((comment) => {
-                console.log(comment);
+              {recipeContent.comments.map((comment, index) => {
+                console.log(recipeContent.comments);
                 return (
-                  <div className="comment">
+                  <div className="comment" key={index}>
                     <div className="user-comment">{comment.user.name}</div>
                     <div className="content-comment">{comment.content}</div>
                   </div>
@@ -194,9 +220,16 @@ const RecipeCard = ({ recipe }) => {
             </button>
           </div>
           <div className="buttons">
-            <button className="add-button" onClick={addToList}>
-              Add To List
-            </button>
+            {inList ? (
+              <button className="already" disabled>
+                already added
+              </button>
+            ) : (
+              <button className="add-button" onClick={addToList}>
+                Add To List
+              </button>
+            )}
+
             <div className="calendar">
               <button onClick={handlePlanData}>Add To calendar</button>
               <input

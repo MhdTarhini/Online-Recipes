@@ -77,7 +77,9 @@ function Register() {
           <a href="#"> Terms , Privacy Policy</a> and{" "}
           <a href="#">Cookies Policy .</a>
         </div>
-        <button className="facebook roundedMedium bold" onClick={handlesubmit}>
+        <button
+          className="facebook roundedMedium bold button"
+          onClick={handlesubmit}>
           Sign up
         </button>
         <div className="have-account">

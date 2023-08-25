@@ -69,7 +69,7 @@ public function addPlan(Request $request) {
             return response()->json([
                 "status" => "error",
                 "message" => "Plan not found",
-            ], 404);
+            ]);
         }
 
         $plan->delete();

@@ -10,6 +10,7 @@ function ShopList() {
       const response = await axios.get(`http://127.0.0.1:8000/api/get_list`);
       const lists = await response.data.data.items;
       setData(lists);
+      console.log(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +46,6 @@ function ShopList() {
                 Cuisine: {recipe.recipe.cuisine}
               </div>
               <div className="shop-list-item-ingredients">
-                <strong>Ingredients:</strong>
                 <ul>
                   {recipe.recipe.ingredients.map((ingredient, index) => (
                     <li key={index}>

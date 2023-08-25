@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import "./addRecipes.css";
 import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 const AddRecipes = () => {
+  const navigate = useNavigate();
   const { userData } = useContext(AuthContext);
   axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
   const [name, setName] = useState("");
@@ -53,6 +55,9 @@ const AddRecipes = () => {
       );
 
       console.log("Response from server:", response.data);
+      if (response.data.status == "success") {
+        navigate("/user");
+      }
     } catch (error) {
       console.error("Error uploading data:", error);
     }

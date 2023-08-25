@@ -34,7 +34,7 @@ function Navbar({ onSearch }) {
   }, [searchText]);
   return (
     <div className="navbar">
-      <div className="logo">Logo</div>
+      <div className="logo-nav">Recipe</div>
       <div className="search">
         <svg
           width="24px"

@@ -1,7 +1,6 @@
 
 .navbar {
-    background-color: #4c81af;
-    color: white;
+    background-color: #166866;
     padding: 10px 30px;
     display: flex;
     align-items: center;
@@ -10,9 +9,10 @@
     width: 100%;
 }
 
-.logo {
+.logo-nav {
     font-size: 24px;
     font-weight: bold;
+    color: #ff6b6b;
 }
 
 .search {
@@ -34,4 +34,5 @@
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    color: #ff6b6b;
 }

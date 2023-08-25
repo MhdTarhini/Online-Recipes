@@ -1,10 +1,14 @@
 .homepage {
     display: flex;
-    gap: 10px;
+    gap: 150px;
+        width: 100%;
 
 }
 
 .outlet-page {
     display: flex;
     flex-direction: column;
+}
+.main-page {
+    padding-left: 300px;
 }

@@ -8,6 +8,7 @@ body {
         align-items: center;
         justify-content: center;
         height: 100vh;
+        color: white;
 }
 
 .logo {
@@ -20,6 +21,9 @@ body {
     width: 100%;
     max-width: 300px;
     margin-bottom: 1rem;
+}
+    input::placeholder {
+        color: white;
 }
 
 .button {

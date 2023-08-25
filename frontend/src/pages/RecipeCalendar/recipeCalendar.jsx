@@ -51,8 +51,12 @@ function RecipeCalendar() {
   return (
     <div className="calendar-container">
       <h1>Recipe Calendar</h1>
-      <div className="calendar-plan">
-        <Calendar onChange={handleDateChange} value={date} />
+      <div>
+        <Calendar
+          className="calendar-plan-date"
+          onChange={handleDateChange}
+          value={date}
+        />
         {data.length === 0 ? (
           <div className="shop-list-empty">Your calendar list is empty.</div>
         ) : (
@@ -64,7 +68,6 @@ function RecipeCalendar() {
                   Cuisine: {recipe.recipe.cuisine}
                 </div>
                 <div className="shop-list-item-ingredients">
-                  <strong>Ingredients:</strong>
                   <ul>
                     {recipe.recipe.ingredients.map((ingredient, index) => (
                       <li key={index}>
@@ -76,7 +79,7 @@ function RecipeCalendar() {
                 </div>
               </div>
               <div className="shop-list-item-actions">
-                <button onClick={() => RemoveCalendarRecipe(recipe.id)}>
+                <button onClick={() => RemoveCalendarRecipe(recipe.recipe.id)}>
                   Remove
                 </button>
               </div>

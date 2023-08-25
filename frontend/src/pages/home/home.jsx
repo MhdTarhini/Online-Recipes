@@ -7,7 +7,6 @@ function Home() {
   const { userData } = useContext(AuthContext);
   axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
   const [data, setData] = useState([]);
-  const [isliked, setIsLiked] = useState([]);
 
   const handleData = async () => {
     try {
@@ -19,7 +18,6 @@ function Home() {
     }
   };
 
-
   useEffect(() => {
     handleData();
   }, []);
@@ -27,7 +25,7 @@ function Home() {
   return (
     <div className="home">
       {data.map((recipe) => (
-        <RecipeCard recipe={recipe} />
+        <RecipeCard recipe={recipe} key={recipe.id} />
       ))}
     </div>
   );

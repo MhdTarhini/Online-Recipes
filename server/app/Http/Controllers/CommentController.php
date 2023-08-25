@@ -16,10 +16,10 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
         $comment->content = $request->content;
         $comment->save();
-
+        $with_user=$comment->with('user')->first();
         return response()->json([
             'status' => 'success',
-            'comment' => $comment,
+            'comment' => $with_user,
         ]);
     }
 

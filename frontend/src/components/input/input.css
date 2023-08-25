@@ -1,6 +1,7 @@
 .input {
     position: relative;
     padding: 0 5px 0 5px;
+    background-color: #166866;
 }
 
 input {
@@ -8,6 +9,12 @@ input {
     outline: none;
     padding: 8px;
     font-size: 16px;
+    background-color: #166866;
+        border-bottom: 1px solid black;
+    }
+    
+    .input::placeholder {
+        color: white;
 }
 
 .label {

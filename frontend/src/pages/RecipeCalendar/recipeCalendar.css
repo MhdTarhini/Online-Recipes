@@ -3,7 +3,16 @@
     margin-top: 20px;
 }
 
-.calendar-plan {
-    max-width: 500px;
-    margin: 0 auto;
+.calendar-plan-date {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.shop-list-item {
+    background-color: #ffffffcc;
+    padding: 20px;
+}
+
+svg {
+    cursor: pointer;
 }
